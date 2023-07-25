@@ -1,0 +1,1 @@
+Pagnation, improves the user experience by reducing the amount of content displayed on a single page, which can be overwhelming and slow to load. Instead of showing all items at once, pagination divides the content into smaller chunks, displaying only a limited number of items per page.
