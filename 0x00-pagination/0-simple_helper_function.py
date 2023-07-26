@@ -13,7 +13,10 @@ Page numbers are 1-indexed, i.e. the first page is page 1.
 """
 
 
-def index_range(page, page_size):
+from typing import Tuple
+
+
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
     Calculate the start index:
     StartIndex = (PageNumber - 1) * PageSize
