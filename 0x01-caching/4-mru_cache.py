@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Create a class LRUCache that inherits from BaseCaching
+Create a class MRUCache that inherits from BaseCaching
 and is a caching system:
 """
 
@@ -8,7 +8,7 @@ and is a caching system:
 from base_caching import BaseCaching
 
 
-class LRUCache(BaseCaching):
+class MRUCache(BaseCaching):
     """
     LRUCache class inherint parent class BasicCaching
     """
