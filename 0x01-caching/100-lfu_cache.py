@@ -11,39 +11,34 @@ from collections import OrderedDict
 
 class LFUCache(BaseCaching):
     """
-    LFU caching system
+    LFUCache class inherint parent class BasicCaching
     """
+
     def __init__(self):
-        """ Initialize class instance. """
         super().__init__()
-        self.cache_data = OrderedDict()
-        self.mru = ""
+        self.cache_data = {}
+        self.lfu = []
 
     def put(self, key, item):
-        """
-        Add an item in the cache
+        """ Add an item in the cache
         """
         if key and item:
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                if key in self.cache_data:
-                    self.cache_data.update({key: item})
-                    self.mru = key
-                else:
-                    """
-                    discard the most recently used item
-                    """
-                    discarded = self.mru
-                    del self.cache_data[discarded]
-                    print("DISCARD: {}".format(discarded))
-                    self.cache_data[key] = item
-                    self.mru = key
-            else:
+            if key in self.cache_data:
                 self.cache_data[key] = item
-                self.mru = key
+                self.lfu.remove(key)
+            else:
+                if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                    discarded = self.lfu.pop(0)
+                    del self.cache_data[discarded]
+                    print('DISCARD: {}'.format(discarded))
+                self.cache_data[key] = item
+            self.lfu.append(key)
 
     def get(self, key):
         """ Get an item by key
         """
         if key in self.cache_data:
-            self.mru = key
+            self.lfu.remove(key)
+            self.lfu.append(key)
             return self.cache_data[key]
+        return None
