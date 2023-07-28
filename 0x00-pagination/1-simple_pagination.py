@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""
-
-"""
-
 import csv
-import math
 from typing import List, Tuple
 
 
@@ -29,31 +24,18 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
-         takes two integer arguments page with default value 1 and page_size
-         with default value 10.
-         Use assert to verify that both arguments are integers greater than 0.
-         Use index_range to find the correct indexes to paginate the
-         dataset correctly
-         and return the appropriate page of the dataset
-         (i.e. the correct list of rows).
-         If the input arguments are out of range for the dataset,
-         an empty list should be returned.
+        Return list of baby names or assert error
         """
-
-        assert (isinstance(page, int) and isinstance(page_size, int))
-        assert (page > 0 and page_size > 0)
+        assert(isinstance(page, int) and isinstance(page_size, int))
+        assert(page > 0 and page_size > 0)
         [start, end] = index_range(page, page_size)
-        return self.dataset()[start:end]
+        return self.dataset()[start: end]
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
-    Calculate the start index: StartIndex =
-    (PageNumber - 1) * PageSize
-    Calculate the end index: EndIndex = StartIndex + PageSize
+    Return a tuple of size two containing a start index and an end
+    index corresponding to the range of indexes to return in a list
+    for those particular pagination parameters.
     """
-
-    start_index = (page - 1) * page_size
-    end_index = start_index + page_size
-
-    return start_index, end_index
+    return ((page - 1) * page_size, page * page_size)
